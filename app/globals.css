@@ -1,0 +1,527 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #111214;
+  background: #101112;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background:
+    radial-gradient(ellipse at 50% 42%, #303233 0, #181a1b 43%, #090a0b 100%);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  color: inherit;
+}
+
+/* La carcasa blanca y el doble borde recrean el dispositivo del mockup. */
+.stage {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 22px 16px;
+}
+
+.device-shell {
+  width: min(100%, 580px);
+  min-width: 0;
+  padding: 8px;
+  border-radius: 58px;
+  background: #fff;
+  box-shadow: 0 28px 80px rgb(0 0 0 / 45%);
+}
+
+.player-device {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  min-height: min(790px, calc(100svh - 100px));
+  height: min(820px, calc(100svh - 60px));
+  flex-direction: column;
+  overflow: hidden;
+  padding: 20px 22px 18px;
+  border: 2px solid #d5d5d5;
+  border-radius: 49px;
+  background: #fbfbfb;
+}
+
+.status-time {
+  align-self: flex-end;
+  margin: 0 1px 5px;
+  color: #8d9297;
+  font-size: 15px;
+  line-height: 1;
+}
+
+/* El nombre y el álbum mandan en la jerarquía, como en la referencia. */
+.album-heading {
+  padding: 13px 0 17px;
+  text-align: center;
+}
+
+.album-heading h1 {
+  margin: 0;
+  font-size: clamp(32px, 7vw, 48px);
+  font-weight: 750;
+  letter-spacing: -1.6px;
+  line-height: 1.08;
+}
+
+.album-heading p {
+  margin: 3px 0 0;
+  color: #70777d;
+  font-size: clamp(20px, 4vw, 27px);
+  line-height: 1.15;
+}
+
+.track-progress {
+  display: grid;
+  gap: 9px;
+  padding: 6px 0 13px;
+}
+
+.progress-line {
+  height: 7px;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #e8e8e8;
+}
+
+.progress-line::after {
+  display: block;
+  width: 60%;
+  height: 100%;
+  border-radius: inherit;
+  background: #b7b7b7;
+  content: "";
+}
+
+.progress-line--thin {
+  height: 4px;
+  background: #eeeeee;
+}
+
+/* La tarjeta mantiene la ilustración a la izquierda y las líneas a la derecha. */
+.artist-card {
+  display: grid;
+  min-height: 116px;
+  grid-template-columns: 116px 1fr;
+  align-items: stretch;
+  gap: 18px;
+}
+
+.artist-placeholder {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  border: 1px solid #d0d0d0;
+  border-radius: 11px;
+  background: #f1eee9;
+}
+
+.artist-placeholder::before,
+.artist-placeholder::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 110%;
+  height: 2px;
+  background: #a4a4a4;
+  content: "";
+}
+
+.artist-placeholder::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.artist-placeholder::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.artist-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 9px;
+  padding: 1px 0 8px;
+}
+
+.artist-lines span {
+  display: block;
+  height: 19px;
+  border-radius: 3px;
+  background: #cecece;
+}
+
+.artist-lines span:nth-child(1) {
+  width: 94%;
+}
+
+.artist-lines span:nth-child(2) {
+  width: 66%;
+}
+
+.artist-lines span:nth-child(3) {
+  width: 100%;
+}
+
+.artist-lines span:nth-child(4) {
+  width: 76%;
+}
+
+/* Los controles son decorativos: muestran reproducción, avance y volumen. */
+.transport-controls {
+  display: grid;
+  gap: 13px;
+  padding: 17px 0 13px;
+}
+
+.volume-row,
+.control-row {
+  display: flex;
+  align-items: center;
+}
+
+.volume-row {
+  gap: 10px;
+}
+
+.small-control {
+  display: grid;
+  width: 43px;
+  height: 32px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #b8b8b8;
+  border-radius: 4px;
+  background: linear-gradient(#fff, #f0f0f0);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 14%);
+  color: #3f9cff;
+  font-size: 16px;
+}
+
+.volume-track {
+  height: 9px;
+  flex: 1;
+  overflow: hidden;
+  border-radius: 99px;
+  background: #dedede;
+}
+
+.volume-track::after {
+  display: block;
+  width: 44%;
+  height: 100%;
+  border-radius: inherit;
+  background: #888;
+  content: "";
+}
+
+.control-row {
+  width: 88%;
+  min-width: 0;
+  min-height: 44px;
+  justify-content: space-around;
+  gap: 9px;
+  align-self: center;
+  padding: 4px 10px;
+  border-radius: 13px;
+  background: #f1f1f1;
+}
+
+.slider-track {
+  position: relative;
+  height: 11px;
+  flex: 1;
+  min-width: 38px;
+  border: 1px solid #b7b7b7;
+  border-radius: 99px;
+  background: #f8f8f8;
+}
+
+.slider-track::before {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 49%;
+  height: 13px;
+  border-radius: 99px;
+  background: #858585;
+  content: "";
+}
+
+.slider-track::after {
+  position: absolute;
+  top: -5px;
+  left: 43%;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #858585;
+  content: "";
+}
+
+.player-button {
+  display: grid;
+  width: 43px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid #999;
+  border-radius: 4px;
+  background: linear-gradient(#fff, #ededed);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 14%);
+  color: #298cf4;
+  font-size: 15px;
+}
+
+.speaker-icon {
+  margin-left: 2px;
+  color: #419cf7;
+  font-size: 18px;
+}
+
+/* Las muestras distinguen visualmente casillas vacías, marcadas y mixtas. */
+.checkbox-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  padding: 1px 5px 12px;
+}
+
+.checkbox-column {
+  display: grid;
+  gap: 4px;
+  align-content: start;
+}
+
+.checkbox-sample {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  white-space: nowrap;
+  font-size: clamp(14px, 3.6vw, 19px);
+  line-height: 1.15;
+}
+
+.checkbox-box {
+  display: grid;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1.5px solid #898989;
+  border-radius: 4px;
+  background: #fff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.checkbox-box--checked,
+.checkbox-box--mixed {
+  border-color: #858585;
+  background: #858585;
+}
+
+.checkbox-box--mixed {
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+/* La búsqueda conserva el texto de artista y el carrusel destaca el emoji central. */
+.artist-search {
+  width: 100%;
+  height: 48px;
+  padding: 0 16px;
+  border: 1px solid #d0d0d0;
+  border-radius: 22px;
+  outline: 0;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgb(0 0 0 / 3%);
+  font-size: 20px;
+  text-align: center;
+}
+
+.mood-carousel {
+  display: flex;
+  min-height: 105px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(7px, 3vw, 22px);
+  padding: 11px 0;
+}
+
+.mood-item {
+  display: grid;
+  width: 48px;
+  height: 58px;
+  flex: 0 1 48px;
+  place-items: center;
+  border: 0;
+  border-radius: 15px;
+  background: transparent;
+  font-size: 32px;
+}
+
+.mood-item--active {
+  width: 92px;
+  height: 90px;
+  flex-basis: 92px;
+  border: 3px solid #646464;
+  border-radius: 24px;
+  background: #fff;
+  font-size: 54px;
+}
+
+/* La navegación cierra la pantalla con tres destinos siempre visibles. */
+.bottom-navigation {
+  display: flex;
+  min-height: 78px;
+  align-items: flex-end;
+  justify-content: space-around;
+  margin-top: auto;
+  padding: 13px 4px 1px;
+  border-top: 2px solid #ededed;
+}
+
+.nav-item {
+  display: grid;
+  min-width: 52px;
+  height: 52px;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  font-size: 30px;
+}
+
+.nav-menu {
+  display: grid;
+  gap: 5px;
+}
+
+.nav-menu span {
+  width: 27px;
+  height: 3px;
+  background: #151515;
+}
+
+@media (max-width: 480px) {
+  .stage {
+    min-height: 100svh;
+    padding: 8px;
+  }
+
+  .device-shell {
+    padding: 6px;
+    border-radius: 43px;
+  }
+
+  .player-device {
+    min-height: min(790px, calc(100svh - 28px));
+    height: calc(100svh - 28px);
+    padding: 17px 17px 15px;
+    border-radius: 37px;
+  }
+
+  .artist-card {
+    min-height: 106px;
+    grid-template-columns: 106px 1fr;
+    gap: 13px;
+  }
+
+  .artist-placeholder {
+    width: 106px;
+    height: 106px;
+  }
+
+  .artist-lines {
+    gap: 7px;
+  }
+
+  .artist-lines span {
+    height: 17px;
+  }
+
+  .control-row {
+    width: 94%;
+    gap: 4px;
+    padding-inline: 8px;
+  }
+
+  .player-button {
+    width: 34px;
+  }
+
+  .checkbox-showcase {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 7px;
+    padding-inline: 1px;
+  }
+
+  .checkbox-column {
+    min-width: 0;
+  }
+
+  .checkbox-sample {
+    gap: 6px;
+    font-size: clamp(12px, 3.2vw, 15px);
+  }
+}
+
+@media (max-height: 760px) and (min-width: 481px) {
+  .player-device {
+    min-height: 0;
+    height: calc(100svh - 36px);
+    padding-block: 14px;
+  }
+
+  .album-heading {
+    padding-block: 8px 12px;
+  }
+
+  .artist-card {
+    min-height: 98px;
+    grid-template-columns: 98px 1fr;
+  }
+
+  .artist-placeholder {
+    width: 98px;
+    height: 98px;
+  }
+
+  .transport-controls {
+    gap: 8px;
+    padding-block: 11px;
+  }
+
+  .checkbox-showcase {
+    padding-bottom: 8px;
+  }
+
+  .mood-carousel {
+    min-height: 84px;
+  }
+
+  .mood-item--active {
+    height: 72px;
+    font-size: 44px;
+  }
+}
